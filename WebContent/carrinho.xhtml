@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Carrinho de Compras</title>
+    </head>
+    <body>
+        <ui:include src="header.xhtml" />
+        
+        <div class='container' id='main-container'>
+            <div class='row'>
+                <f:view>
+                    <h:form>
+                        <h1><h:outputText value="Carrinho de Compras"/></h1>
+                        <h:dataTable value="#{produtoController.todosItemsDoCarro()}" var="item"  class="table table-bordered">
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nome"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nome}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descrição"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descricao}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Qtde"/>
+                                </f:facet>
+                                <h:outputText value="#{item.qtde}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="opção"/>
+                                </f:facet>
+                                <h:commandLink 
+                                    value="remove"
+                                    action="#{produtoController.removeItemDoCarro(item.id)}"/>
+                            </h:column>
+                        </h:dataTable>
+                        <h:commandLink 
+                                    class="btn btn-success"
+                                    value="Checkout"
+                                    action="#{produtoController.checkout()}"/>
+                    </h:form>
+                </f:view>
+            </div>
+        </div>
+
+    </body>
+</html>

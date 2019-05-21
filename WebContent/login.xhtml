@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body>
+        <ui:include src="header.xhtml"/>
+        <div class="container">
+            <h:form class="form-signin" id="signin">
+                <h2 class="form-signin-heading">Por favor acesse</h2>
+                <label for="nome" class="sr-only">Nome</label>
+                <!--<input id="nome" class="form-control" placeholder="nome" required="" autofocus="" type="text" name="nome">-->
+                <h:inputText value="#{produtoController.usuario}" class="form-control" required=""/>
+                <label for="inputPassword" class="sr-only">Senha</label>
+                <!--<input id="senha" class="form-control" placeholder="Senha" required="" type="password" name="senha">-->
+                <h:inputText value="#{produtoController.senha}" class="form-control" required=""/>
+                <!--<button class="btn btn-md btn-primary btn-block" type="submit">Login</button>-->
+                <h:commandButton class="btn btn-md btn-primary btn-block" type="submit" value="Login" action="#{produtoController.autenticar('index')}"/>
+            </h:form>
+
+        </div>
+    </h:body>
+</html>
+
