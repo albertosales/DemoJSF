@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html lang="en" 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+    <title>Gerenciar Produtos</title>
+    <style type="text/css">
+        .btnWidth {
+            width: 80px;
+        }     
+        .col-sm-updated {        	
+    		padding-top: 7px;    		
+        }
+         .col-sm-updated a {
+         	margin-left: 30px;
+        	text-decoration: none !important;
+        }
+        .col-sm-27 {
+        	width: 27% !important	;
+        }
+    </style>
+</h:head>
+<h:body>
+	<center><h2><h:outputText value="Manutenção de Produtos (CRUD)"/></h2></center>
+    <h:form id="produtooBeanForm" styleClass="form-horizontal">        
+      	<h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto;">
+            <h:outputText value="Nome " />
+            <p:inputText id="nome" value="#{produtoController.nome}"/>
+			<p:message for="nome" />
+			
+            <h:outputText value="Descrição " />
+            <p:inputText id="desc" value="#{produtoController.descricao}" />
+ 			<p:message for="desc" />
+ 			
+            <h:outputText value="Preço " />
+            <p:inputText id="preco" value="#{produtoController.preco}"/>
+            <p:message for="preco" />
+ 			
+ 			<!--   <h:outputText value="Imagem " />
+             <p:inputText id="imagem" value="#{produtoController.bImagem}"/> 
+ 			<p:message for="imagem" />  -->
+ 			
+ 			
+             <p:fileUpload fileUploadListener="#{produtoController.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                  update="messages" sizeLimit="100000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
+                  <p:growl id="messages" showDetail="true" />
+            <!-- < p:fileUpload value="#{produtoController.file}" mode="simple" update="messages" skinSimple="true"/> 
+
+     		 <p:commandButton value="Upload" ajax="false" action="#{produtoController.upload()}" disabled="false" />
+     		-->  
+     		        	
+        	<p:commandButton value="Adicionar" icon="fa fa-fw fa-plus" action="#{produtoController.criarProduto()}"/>
+        </h:panelGrid>
+    </h:form>
+    <h:form  id="form">
+        <p:dataTable value="#{produtoController.todosProdutos()}" var="prod" style="margin: 2em;" rowKey="#{prod.id}">
+             <p:column headerText="Nome">
+                 <h:outputText value="#{prod.nome}"/>
+             </p:column>
+             <p:column headerText="Descrição">
+                 <h:outputText value="#{prod.descricao}"/>
+             </p:column>
+
+             <p:column headerText="Preço">
+                 <h:outputText value="#{prod.preco}"/>
+             </p:column>
+              <p:column style="width:100px;text-align: center">
+                 <p:commandButton update=":form:produtoEditar" oncomplete="PF('editDialog').show()"  styleClass="ui-priority-primary" icon="ui-icon-pencil" >
+                     <f:setPropertyActionListener value="#{prod}" target="#{produtoController.selProduto}"/>
+                 </p:commandButton>
+                 <p:commandButton action="#{produtoController.deletarProduto(prod)}" id="deletar"  styleClass="ui-priority-primary" icon="ui-icon-closethick"></p:commandButton>
+              </p:column>
+         </p:dataTable>
+         <p:dialog header="Editar Produto" widgetVar="editDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+             <p:outputPanel id="produtoEditar" style="text-align:center;">
+                 <p:panelGrid  columns="2" rendered="#{not empty produtoController.selProduto}" columnClasses="label,value">
+
+                      <h:outputText value="Nome: " />
+                      <p:inputText value="#{produtoController.selProduto.nome}" />
+
+                      <h:outputText value="Descrição: " />
+                      <p:inputText value="#{produtoController.selProduto.descricao}" />
+
+                      <h:outputText value="Preço: " />
+                      <p:inputText value="#{produtoController.selProduto.preco}"/>
+
+                      <h:outputText value="Imagem: " />
+                      <p:inputText value="#{produtoController.selProduto.imagem}" />
+
+                  </p:panelGrid>
+                  <p:commandButton value="Update" icon="fa fa-fw fa-pencil" action="#{produtoController.atualizarProduto()}"/>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+</h:body>
+</html>
