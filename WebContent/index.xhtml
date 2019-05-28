@@ -1,50 +1,56 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <h:head>
-        <title>OnLineJSF</title>
-    </h:head>
-    <h:body>
-        <ui:include src="header.xhtml" />
-        <div class='container' id='main-container'>
-            <div class='row'>
-                <f:view>
-                    <h:form>
-                        <h:dataTable value="#{produtoController.todosProdutos()}" var="item" class="table table-bordered">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Id"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nome"/>
-                                </f:facet>
-                                <h:outputText value="#{item.nome}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Descrição"/>
-                                </f:facet>
-                                <h:outputText value="#{item.descricao}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="opção"/>
-                                </f:facet>
-                                <h:commandLink 
-                                    value="adicionar"
-                                    action="#{produtoController.adicionarItemCarro(item.id)}"/>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
-                </f:view>
-            </div>
-        </div>
-    </h:body>
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title>OnLineJSF</title>
+</h:head>
+<h:body>
+	<ui:include src="header.xhtml" />
+	<div class='container' id='main-container'>
+		<div class='row'>
+			<f:view>
+				<h:form>
+					<h:dataTable value="#{produtoController.produtos}"
+						var="item" class="table table-bordered">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id" />
+							</f:facet>
+							<h:outputText value="#{item.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<h:outputText value="#{item.nome}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Descrição" />
+							</f:facet>
+							<h:outputText value="#{item.descricao}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Preço" />
+							</f:facet>
+							<h:outputText value="#{item.preco}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="opção" />
+							</f:facet>
+							<h:commandLink value="adicionar"
+								action="#{produtoController.adicionarItemCarro(item.id)}" />
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</f:view>
+		</div>
+	</div>
+</h:body>
 </html>
 
