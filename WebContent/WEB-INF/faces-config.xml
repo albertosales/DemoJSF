@@ -9,4 +9,9 @@
 		<managed-bean-class>controllers.ProdutoController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>crudProdutoController</managed-bean-name>
+		<managed-bean-class>controllers.produto.CrudProdutoController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 </faces-config>

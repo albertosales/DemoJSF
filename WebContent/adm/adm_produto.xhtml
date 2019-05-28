@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>ADM Produto</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../css/styles.css" />
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+</h:head>
+<h:body>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+
+				<h3>Gerenciamento de Produtos</h3>
+				<hr />
+
+				<h:form>
+					<div class="row">
+						<div class="col col-md-6">
+							<label for="referencia">Referência</label>
+							<h:inputText value="#{crudProdutoController.referencia}"
+								class="form-control" required="true" name="referencia" />
+							<label for="nome">Nome</label>
+							<h:inputText value="#{crudProdutoController.nome}"
+								class="form-control" required="true" name="nome" />
+
+						</div>
+						<div class="col col-md-6">
+							<label for="preco">Preço</label>
+							<h:inputText value="#{crudProdutoController.preco}" type="nunber"
+								class="form-control" required="true" name="preco" />
+							<label for="descricao">Descrição</label>
+							<h:inputText value="#{crudProdutoController.descricao}"
+								class="form-control" required="true" name="descricao" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col col-md-2">
+							<h:commandButton class="btn btn-md btn-primary btn-block"
+								type="submit" value="Salvar"
+								action="#{crudProdutoController.salvar()}" />
+						</div>
+					</div>
+				</h:form>
+
+				<br />
+				<div class='row'>
+					<div class="col col-12">
+						<f:view>
+							<h:form>
+								<h:dataTable value="#{produtoController.todosProdutos()}"
+									var="item" class="table table-bordered">
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Referência" />
+										</f:facet>
+										<h:outputText value="#{item.referencia}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Preço" />
+										</f:facet>
+										<h:outputText value="#{item.preco}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Nome" />
+										</f:facet>
+										<h:outputText value="#{item.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Descrição" />
+										</f:facet>
+										<h:outputText value="#{item.descricao}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="opção" />
+										</f:facet>
+										<h:commandButton value="Editar" class="btn btn-warning btn-sm"
+											action="#{crudProdutoController.alterar(item)}" />
+										<h:commandButton value="Excluir" class="btn btn-danger btn-sm"
+											action="#{crudProdutoController.excluir(item)}" />
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</h:body>
+</html>
