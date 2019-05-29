@@ -555,12 +555,12 @@
           <div class="container padding-top-3x">
             <div class="row justify-content-center align-items-center">
               <div class="col-lg-5 col-md-6 padding-bottom-2x text-md-left text-center">
-                <div class="from-bottom"><img class="d-inline-block w-150 mb-4" src="img/hero-slider/logo02.png" alt="Puma"/>
-                  <div class="h2 text-body mb-2 pt-1">Google Home - Smart Speaker</div>
-                  <div class="h2 text-body mb-4 pb-1">starting at <span class="text-medium">$129.00</span></div>
-                </div><a class="btn btn-primary scale-up delay-1" href="shop-grid-ls.html">View Offers<i class="icon-arrow-right"></i></a>
+                <div class="from-bottom"><img class="d-inline-block w-150 mb-4" src="img/hero-slider/logo02.png" alt="#{produtoController.getProduto(8).nome}"/>
+                  <div class="h2 text-body mb-2 pt-1"><h:outputText value="#{produtoController.getProduto(8).nome}"/></div>
+                  <div class="h2 text-body mb-4 pb-1">A partir de  <span class="text-medium">R$ <h:outputText value="#{produtoController.getProduto(8).preco}"/></span></div>
+                </div><a class="btn btn-primary scale-up delay-1" href="shop-grid-ls.html">Visualizar Ofertas<i class="icon-arrow-right"></i></a>
               </div>
-              <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/hero-slider/02.png" alt="Puma Backpack"/></div>
+              <div class="col-md-6 padding-bottom-2x mb-3"><p:graphicImage value = "#{produtoController.getImagem(8)}" class="d-block mx-auto" alt="#{produtoController.getProduto(8).nome}"/></div>
             </div>
           </div>
         </div>
@@ -569,11 +569,11 @@
             <div class="row justify-content-center align-items-center">
               <div class="col-lg-5 col-md-6 padding-bottom-2x text-md-left text-center">
                 <div class="from-bottom"><img class="d-inline-block w-150 mb-3" src="img/hero-slider/logo01.png" alt="Sony"/>
-                  <div class="h2 text-body mb-2 pt-1">Modern Powerful Laptop</div>
-                  <div class="h2 text-body mb-4 pb-1">for only <span class="text-medium">$1,459.99</span></div>
-                </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Shop Now<i class="icon-arrow-right"></i></a>
+                  <div class="h2 text-body mb-2 pt-1"><h:outputText value="#{produtoController.getProduto(6).nome}"/></div>
+                  <div class="h2 text-body mb-4 pb-1">Por apenas <span class="text-medium">R$ <h:outputText value="#{produtoController.getProduto(6).preco}"/></span></div>
+                </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Compre agora<i class="icon-arrow-right"></i></a>
               </div>
-              <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/hero-slider/01.png" alt="Chuck Taylor All Star II"/></div>
+              <div class="col-md-6 padding-bottom-2x mb-3"><p:graphicImage value = "#{produtoController.getImagem(6)}" alt="Chuck Taylor All Star II"/></div>
             </div>
           </div>
         </div>
@@ -582,11 +582,11 @@
             <div class="row justify-content-center align-items-center">
               <div class="col-lg-5 col-md-6 padding-bottom-2x text-md-left text-center">
                 <div class="from-bottom"><img class="d-inline-block w-150 mb-3" src="img/hero-slider/logo03.png" alt="Motorola"/>
-                  <div class="h2 text-body mb-2 pt-1">Beats Studio by Dr.Dre</div>
-                  <div class="h2 text-body mb-4 pb-1">for only <span class="text-medium">$349.50</span></div>
-                </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Shop Now<i class="icon-arrow-right"></i></a>
+                  <div class="h2 text-body mb-2 pt-1"><h:outputText value="#{produtoController.getProduto(4).nome}"/></div>
+                  <div class="h2 text-body mb-4 pb-1">Por apenas <span class="text-medium">R$ <h:outputText value="#{produtoController.getProduto(4).preco}"/></span></div>
+                </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Compre agora <i class="icon-arrow-right"></i></a>
               </div>
-              <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="img/hero-slider/03.png" alt="Moto 360"/></div>
+              <div class="col-md-6 padding-bottom-2x mb-3"><p:graphicImage value = "#{produtoController.getImagem(4)}" alt="Moto 360"/></div>
             </div>
           </div>
         </div>
@@ -631,91 +631,50 @@
       </div>
     </section>
     <!-- Featured Products-->
-    <section class="container padding-bottom-2x mb-2">
-      <h2 class="h3 pb-3 text-center">Produtos em Destaques/Lançamento</h2>
-      <div class='container' id='main-container'>
+        <section class="container padding-bottom-2x mb-2">
+      <h2 class="h3 pb-3 text-center">Produtos em Destaques/Lançamentos</h2>
       <div class="row">
-      <f:view>
-        <h:form>
-          <!--  <h:dataTable value="#{produtoController.todosProdutos()}" rowIndexVar="row" var="item" class="table table-bordered"> -->
         <div class="col-lg-3 col-md-4 col-sm-6">
           <div class="product-card mb-30">
-            <div class="product-badge bg-danger">Sale</div><a class="product-thumb" href="shop-single.html"><p:graphicImage value = "#{produtoController.getImagem(3)}" alt="Product"/></a>
-            <div class="product-card-body">            
+            <div class="product-badge bg-danger">Promoção</div><a class="product-thumb" href="shop-single.html"><p:graphicImage value = "#{produtoController.getImagem(3)}" alt="Product"/></a>
+            <div class="product-card-body">
               <div class="product-category"><a href="#">Smart home</a></div>
-              <h3 class="product-title">
-                <a href="shop-single.html">				  
-                <h:outputText value="#{produtoController.getProduto(3).nome}"/></a></h3>
+              <h3 class="product-title"><a href="shop-single.html"><h:outputText value="#{produtoController.getProduto(3).nome}"/></a></h3>
               <h4 class="product-price">
-                <del>$62.00</del>$<h:outputText value="#{produtoController.getProduto(3).preco}"/>                 
+                <del>$62.00</del>R$ <h:outputText value="#{produtoController.getProduto(3).preco}"/>
               </h4>
-            </div>
-            <div class="product-button-group">
-				<a class="product-button btn-wishlist" href="#">
-				<i class="icon-heart"></i><span>Wishlist</span></a>
-				<a class="product-button btn-compare" href="#">
-				<i class="icon-repeat"></i><span>Compare</span></a>
-				<a class="product-button" href="#{produtoController.getProduto(1).nome}" data-toast-type="success" data-toast-position="topRight" 
-					data-toast-icon="icon-check-circle" data-toast-title="Product" 
-					data-toast-message="successfuly added to cart!">
-					<i class="icon-shopping-cart"></i><span>To Cart</span></a>
-			 </div>          
-          </div>
-        </div>  
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="product-card mb-30">
-              <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
-              </div><a class="product-thumb" href="shop-single.html"><p:graphicImage value = "#{produtoController.getImagem(1)}" alt="Product"/> </a>
-            <div class="product-card-body">
-              <div class="product-category"><a href="#">Photo cameras</a></div>
-              <h3 class="product-title"><a href="shop-single.html">
-                  <!--  ><h:column> -->
-                     <h:outputText value="#{produtoController.getProduto(1).nome}"/>
-                  <!--  </h:column> -->
-                  </a></h3>              	             
-              <h4 class="product-price">                   
-                     <h:outputText value="$ #{produtoController.getProduto(1).preco}"/>                  
-                  </h4>
-            </div>
-            <div class="product-button-group">
-            	<a class="product-button btn-wishlist" href="#">
-            	<i class="icon-heart"></i><span>Wishlist</span></a>
-            	<a class="product-button btn-compare" href="#">
-            	<i class="icon-repeat"></i><span>Compare</span></a>
-            	<a class="product-button" href="#" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!">
-            	<i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="product-card mb-30"><a class="product-thumb" href="shop-single.html"><img src="img/shop/products/05.jpg" alt="Product"/></a>
-            <div class="product-card-body">
-              <div class="product-category"><a href="#">Headphones</a></div>
-              <h3 class="product-title"><a href="shop-single.html">
-                  <!--  <h:column> -->
-                    	<h:outputText value="#{produtoController.getProduto(1).nome}"/>
-                  <!--  </h:column> -->              
-                  Zeus Bluetooth Headphones</a></h3>
-              <h4 class="product-price">
-              		<!--  <h:column> -->
-                    	<h:outputText value="#{produtoController.getProduto(1).preco}"/>
-                  	<!--  </h:column> -->
-              		$28.99</h4>
             </div>
             <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="#" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="product-card mb-30"><a class="product-thumb" href="shop-single.html"><img src="img/shop/products/07.jpg" alt="Product"/></a>
+          <div class="product-card mb-30">
+              <div class="rating-stars"><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star filled"></i><i class="icon-star"></i>
+              </div><a class="product-thumb" href="shop-single.html"><p:graphicImage value = "#{produtoController.getImagem(2)}" alt="Product"/></a>
+            <div class="product-card-body">
+              <div class="product-category"><a href="#">Photo cameras</a></div>
+              <h3 class="product-title"><a href="shop-single.html"><h:outputText value="#{produtoController.getProduto(2).nome}"/></a></h3>
+              <h4 class="product-price">R$ <h:outputText value="#{produtoController.getProduto(2).preco}"/></h4>
+            </div>
+            <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="#" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <div class="product-card mb-30"><a class="product-thumb" href="shop-single.html"><p:graphicImage value = "#{produtoController.getImagem(3)}" alt="Product"/></a>
+            <div class="product-card-body">
+              <div class="product-category"><a href="#">Headphones</a></div>
+              <h3 class="product-title"><a href="shop-single.html"><h:outputText value="#{produtoController.getProduto(3).nome}"/></a></h3>
+              <h4 class="product-price">R$ <h:outputText value="#{produtoController.getProduto(3).preco}"/></h4>
+            </div>
+            <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="#" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <div class="product-card mb-30"><a class="product-thumb" href="shop-single.html"><p:graphicImage value = "#{produtoController.getImagem(2)}" alt="Product"/></a>
             <div class="product-card-body">
               <div class="product-category"><a href="#">Smartphones</a></div>
-              <h3 class="product-title"><a href="shop-single.html">
-              		
-                    	<h:outputText value="#{produtoController.getProduto(1).nome}"/>
-                  	
-              		</a></h3>
-              <h4 class="product-price">
-                    	<h:outputText value="#{produtoController.getProduto(1).preco}"/>
-              </h4>
+              <h3 class="product-title"><a href="shop-single.html"><h:outputText value="#{produtoController.getProduto(2).nome}"/></a></h3>
+              <h4 class="product-price">R$ <h:outputText value="#{produtoController.getProduto(2).preco}"/></h4>
             </div>
             <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="#" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
           </div>
@@ -726,13 +685,8 @@
               </div><a class="product-thumb" href="shop-single.html"><img src="img/shop/products/11.jpg" alt="Product"/></a>
             <div class="product-card-body">
               <div class="product-category"><a href="#">Headphones</a></div>
-              <h3 class="product-title">
-              		<a href="shop-single.html">
-                    	<h:outputText value="#{produtoController.getProduto(1).nome}"/>
-              		</a></h3>
-              <h4 class="product-price">
-	                   	<h:outputText value="#{produtoController.getProduto(1).preco}"/>
-              </h4>
+              <h3 class="product-title"><a href="shop-single.html">Edifier W855BT Bluetooth</a></h3>
+              <h4 class="product-price">$99.75</h4>
             </div>
             <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="#" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
           </div>
@@ -742,12 +696,8 @@
             <div class="product-badge bg-secondary border-default text-body">Out of stock</div><a class="product-thumb" href="shop-single.html"><img src="img/shop/products/03.jpg" alt="Product"/></a>
             <div class="product-card-body">
               <div class="product-category"><a href="#">Computers, laptops</a></div>
-              <h3 class="product-title"><a href="shop-single.html">
-                   	<h:outputText value="#{produtoController.getProduto(1).nome}"/>
-                  </a></h3>
-              <h4 class="product-price">
-                    	<h:outputText value="#{produtoController.getProduto(1).preco}"/>
-              </h4>
+              <h3 class="product-title"><a href="shop-single.html">Microsoft Surface Pro 4</a></h3>
+              <h4 class="product-price">$1,049.10</h4>
             </div>
             <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="shop-single.html"><i class="icon-arrow-right"></i><span>Details</span></a></div>
           </div>
@@ -756,12 +706,8 @@
           <div class="product-card mb-30"><a class="product-thumb" href="shop-single.html"><img src="img/shop/products/12.jpg" alt="Product"/></a>
             <div class="product-card-body">
               <div class="product-category"><a href="#">Wearable electornics</a></div>
-              <h3 class="product-title"><a href="shop-single.html">
-	               	<h:outputText value="#{produtoController.getProduto(1).nome}"/>
-				</a></h3>
-              <h4 class="product-price">
-              	    <h:outputText value="$ #{produtoController.getProduto(1).nome}"/>
-              </h4>
+              <h3 class="product-title"><a href="shop-single.html">Apple Watch Series 3</a></h3>
+              <h4 class="product-price">$329.10</h4>
             </div>
             <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="#" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
           </div>
@@ -771,21 +717,14 @@
             <div class="product-badge bg-danger">Sale</div><a class="product-thumb" href="shop-single.html"><img src="img/shop/products/09.jpg" alt="Product"/></a>
             <div class="product-card-body">
               <div class="product-category"><a href="#">Action cameras</a></div>
-              <h3 class="product-title"><a href="shop-single.html">
-	               	<h:outputText value="#{produtoController.getProduto(1).nome}"/>
-				</a></h3>
+              <h3 class="product-title"><a href="shop-single.html">Samsung Gear 360 Camera</a></h3>
               <h4 class="product-price">
-               	<del>$74.00</del>
-               	<h:outputText value="#{produtoController.getProduto(1).preco}"/>                
+                <del>$74.00</del>$68.00
               </h4>
             </div>
             <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="#" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
-          </div> 
-        </div> 
-       <!--   </h:dataTable> --> 
-      </h:form>
-      </f:view>
-      </div>
+          </div>
+        </div>
       </div>
       <div class="text-center"><a class="btn btn-outline-secondary" href="shop-grid-ls.html">View All Products</a></div>
     </section>

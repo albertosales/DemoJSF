@@ -183,6 +183,7 @@ public class ProdutoController implements Serializable {
 	}
 
 	public void reiniciarVariaveis() {
+		this.id = null;
 		this.nome = "";
 		this.descricao = "";
 		this.preco = 0;
@@ -190,25 +191,28 @@ public class ProdutoController implements Serializable {
 	}
 
 	public String criarProduto() {
+		this.produto.setId(null);
 		this.produto.setNome(this.getNome());
-		//System.out.println("produto " + this.nome);
+		System.out.println("produto " + this.nome);
 		this.produto.setDescricao(this.getDescricao());
-		//System.out.println("descrição " + this.descricao);
+		System.out.println("descrição " + this.descricao);
 		this.produto.setPreco(this.getPreco());
-		//System.out.println("preco " + this.preco);
+		System.out.println("preco " + this.preco);
 		this.produto.setImagem(this.getbImagem());
-		/*
+		
 		System.out.println("imagem: " + this.preco);
 		System.out.println("Informação do Produto");
 		System.out.println("produto nome " + produto.getNome() + " foi criado");
 		System.out.println("produto desc " + produto.getDescricao() + " foi criado");
 		System.out.println("produto preco " + produto.getPreco() + " foi criado");
 		System.out.println("produto imagem " + produto.getImagem() + " foi criado");
-		System.out.println("produto id " + produto.getId() + " foi criado");
-		*/
+		System.out.println("produto id " + produto.getId() + " foi criado");		
+		System.out.println("O OBJETO PRODUTO --> " + this.produto.toString());
+		System.out.println("O OBJETO PRODUTO FAÇADE --> " + this.produtosFacade.toString());
 		this.produtosFacade.create(this.produto);
-		this.reiniciarVariaveis();
-		return "";
+		this.reiniciarVariaveis();		
+		//return "";
+		return "novoProduto.xhtml?faces-redirect=true";
 	}
 
 	public String atualizarProduto() {
