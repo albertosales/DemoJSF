@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>ADM Produto</title>
@@ -14,12 +15,12 @@
 	<body>
 		<div class="container">
 			<div class="jumbotron">
-
+				<p:growl id="messages" showDetail="true" />
 				<h3>Gerenciamento de Produtos</h3>
 				<hr />
-
 				<h:form>
 					<div class="row">
+
 						<div class="col col-md-6">
 							<label for="referencia">Referência</label>
 							<h:inputText value="#{crudProdutoController.referencia}"
@@ -37,12 +38,25 @@
 							<h:inputText value="#{crudProdutoController.descricao}"
 								class="form-control" required="true" name="descricao" />
 						</div>
+
+						<div class="col col-md-6">
+							<label for="preco">Imagem</label>
+							<p:fileUpload
+								fileUploadListener="#{crudProdutoController.handleFileUpload}"
+								mode="advanced" dragDropSupport="false" update="messages"
+								sizeLimit="750000" fileLimit="1"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+						</div>
 					</div>
 					<div class="row">
 						<div class="col col-md-2">
 							<h:commandButton class="btn btn-md btn-primary btn-block"
 								type="submit" value="Salvar"
 								action="#{crudProdutoController.salvar()}" />
+						</div>
+						<div class="col col-md-2">
+							<h:commandButton class="btn btn-md btn-danger btn-block" value="Cancelar"
+								action="#{crudProdutoController.limpar()}" />
 						</div>
 					</div>
 				</h:form>
