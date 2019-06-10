@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>ADM Estoque</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +11,164 @@
 	<link rel="stylesheet" href="../css/bootstrap.min.css" />
 </h:head>
 <h:body>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<p:growl id="messages" showDetail="true" />
+				<div class="row">
+					<div class="col col-md-1">
+						<a href="../adm.html">
+							<button class="btn btn-warning btn-sm">
+								<img src="../images/baseline_home_black_18dp.png" alt="home" />
+							</button>
+						</a>
+					</div>
+					<div class="col col-md-11" align="center">
+						<span style="font-size: 18pt;">Gerenciamento de Estoque</span>
+					</div>
+				</div>
+				<hr />
+				<h:form>
+					<div class="row">
+						<div class="col col-md-6">
+							<label for="prod">Produto</label>
+							<h:inputText value="#{estoqueController.descProd}" type="text"
+								class="form-control" required="false" disabled="true"
+								name="prod" />
+						</div>
+						<div class="col col-md-6">
+							<br />
+							<p:commandButton value="Buscar" type="button"
+								class="btn btn-sm btn-primary" onclick="PF('dlg').show();" />
+							<p:dialog header="Buscar Produto" widgetVar="dlg" modal="true">
+								<label for="razao">Selecione o produto</label>
+								<f:view>
 
+									<div class="table-responsive">
+										<h:dataTable value="#{produtoController.todosProdutos()}"
+											var="item" class="table table-bordered">
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Imagem" />
+												</f:facet>
+												<img src="data:image/png;base64,#{item.imagemBase64}"
+													height="60" width="60" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Referência" />
+												</f:facet>
+												<h:outputText value="#{item.referencia}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Preço" />
+												</f:facet>
+												<h:outputText value="#{item.preco}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Qtd Em Estoque" />
+												</f:facet>
+												<h:outputText value="#{item.quantidade}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Nome" />
+												</f:facet>
+												<h:outputText value="#{item.nome}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Descrição" />
+												</f:facet>
+												<h:outputText value="#{item.descricao}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Categoria" />
+												</f:facet>
+												<h:outputText value="#{item.categoria.nome}" />
+											</h:column>
+											<h:column>
+												<f:facet name="header">
+													<h:outputText value="Ação" />
+												</f:facet>
+												<h:commandButton value="Selecionar"
+													class="btn btn-warning btn-sm"
+													action="#{estoqueController.setProdutoSelecionado(item)}" />
+											</h:column>
+										</h:dataTable>
+									</div>
+
+								</f:view>
+								<p:commandButton value="Fechar" onclick="PF('dlg').hide();" />
+							</p:dialog>
+						</div>
+					</div>
+				</h:form>
+				<h:form>
+					<div class="row">
+						<div class="col col-md-6">
+							<label for="quantidade">Quantidade</label>
+							<h:inputText value="#{estoqueController.quantidade}"
+								type="number" class="form-control" required="true"
+								name="quantidade" />
+						</div>
+						<div class="col col-md-6">
+							<label for="razao">Razão do Movimento</label><br />
+							<h:selectOneMenu class="form-control" name="razao" id="razao_id"
+								value="#{estoqueController.codRazao}">
+								<f:selectItems value="#{estoqueController.getValuesComboBox()}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col col-md-2">
+							<h:commandButton class="btn btn-md btn-primary btn-block"
+								type="submit" value="Salvar"
+								action="#{estoqueController.salvar()}" />
+						</div>
+
+					</div>
+				</h:form>
+
+				<br />
+				<div class='row'>
+					<div class="col col-md-12">
+						<f:view>
+							<h:dataTable value="#{estoqueController.listarMovimentos()}"
+								var="item" class="table table-bordered">
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Data da operação" />
+									</f:facet>
+									<h:outputText value="#{item.dataFormatada()}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Produto" />
+									</f:facet>
+									<h:outputText value="#{item.produto.descricao}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Quantidade" />
+									</f:facet>
+									<h:outputText value="#{item.quantidade}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Razão movimento" />
+									</f:facet>
+									<h:outputText value="#{item.razaoMovimentoEstoque.descricao}" />
+								</h:column>
+							</h:dataTable>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </h:body>
 </html>

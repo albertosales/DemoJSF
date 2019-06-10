@@ -7,16 +7,20 @@ import javax.faces.application.FacesMessage;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
+import model.entities.Categoria;
 import model.entities.Produtos;
+import model.sessionbeans.CategoriaFacade;
 import model.sessionbeans.ProdutosFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named(value = "crudProdutoController")
 @SessionScoped
@@ -28,22 +32,44 @@ public class CrudProdutoController implements Serializable {
 	String descricao = "";
 	String preco;
 	String referencia;
+	String precoPromocional;
+	String marca;  
 	Integer id;
+	String quantidade;
+	String quantidadeMinima;
+	Long categoria;
 
 	@EJB
 	private ProdutosFacade produtosFacade;
+
+	@EJB
+	private CategoriaFacade categoriaFacade;
 
 	private UploadedFile file;
 	private byte[] bImagem;
 
 	public void salvar() {
 		try {
+
+			if (!isDadosValidos()) {
+				return;
+			}
+
 			Produtos produto = new Produtos();
+			Categoria categoria = new Categoria();
+			categoria.setId(this.categoria);
 
 			produto.setImagem(bImagem);
 			produto.setDescricao(descricao);
 			produto.setNome(nome);
+			produto.setMarca(marca);
+			produto.setQuantidadeMinima(Double.parseDouble(quantidadeMinima));
+			
+			if (precoPromocional != null && !precoPromocional.isEmpty()) {
+				produto.setPrecoPromocional(Double.parseDouble(precoPromocional));
+			}
 			produto.setId(id);
+			produto.setCategoria(categoria);
 			produto.setReferencia(referencia);
 			produto.setPreco(Double.parseDouble(preco));
 
@@ -53,7 +79,7 @@ public class CrudProdutoController implements Serializable {
 				this.produtosFacade.edit(produto);
 			}
 
-			FacesMessage msg = new FacesMessage("Sucesso", "Operação realizada com sucesso!");
+			FacesMessage msg = new FacesMessage("Sucesso", "Operaï¿½ï¿½o realizada com sucesso!");
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			refresh();
@@ -66,35 +92,62 @@ public class CrudProdutoController implements Serializable {
 		}
 	}
 
+	private boolean isDadosValidos() {
+		try {
+			Double.parseDouble(preco);
+			return true;
+		} catch (Exception e) {
+			FacesMessage msg = new FacesMessage("Falha!!!", e.getMessage());
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		return false;
+	}
+
 	public void limpar() {
 		this.limparCampos();
 	}
-	
+
 	public void excluir(Produtos entidade) {
 		try {
 			produtosFacade.remove(entidade);
 
-			FacesMessage msg = new FacesMessage("Sucesso", "Operação realizada com sucesso!");
+			FacesMessage msg = new FacesMessage("Sucesso", "Operaï¿½ï¿½o realizada com sucesso!");
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			refresh();
 		} catch (Exception e) {
 			e.printStackTrace();
-			FacesMessage msg = new FacesMessage("Falha!!!", "Não foi possível excluir o produto");
+			FacesMessage msg = new FacesMessage("Falha!!!", "Nï¿½o foi possï¿½vel excluir o produto");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 
 	}
 
+	public List<SelectItem> getValuesComboBox() {
+		List<SelectItem> toReturn = new ArrayList<SelectItem>();
+		List<Categoria> categorias = categoriaFacade.findAll();
+		for (Categoria categoria : categorias) {
+			toReturn.add(new SelectItem(categoria.getId(), categoria.getNome()));
+		}
+
+		return toReturn;
+	}
+
 	public void alterar(Produtos entidade) {
 		this.nome = entidade.getNome();
 		this.descricao = entidade.getDescricao();
 		this.id = entidade.getId();
+		this.categoria = entidade.getCategoria().getId();
 		this.referencia = entidade.getReferencia();
 		this.preco = "" + entidade.getPreco();
+		this.quantidadeMinima = "" + entidade.getQuantidadeMinima();
+		this.quantidade = "" + (entidade.getQuantidade() == null ? "0.0" : entidade.getQuantidade());
 		this.bImagem = entidade.getImagem();
-	}
+		this.precoPromocional = "" + (entidade.getPrecoPromocional() == null ? "" : entidade.getPrecoPromocional());
+		this.marca = entidade.getMarca();
+ 	}
 
 	public String getNome() {
 		return nome;
@@ -116,8 +169,14 @@ public class CrudProdutoController implements Serializable {
 		this.nome = "";
 		this.descricao = "";
 		this.id = null;
+		this.categoria = null;
 		this.referencia = "";
 		this.preco = "";
+		this.marca = "";
+		this.precoPromocional = "";
+		this.bImagem = null;
+		this.quantidadeMinima = null;
+		this.quantidade = null;
 	}
 
 	public String getPreco() {
@@ -136,6 +195,47 @@ public class CrudProdutoController implements Serializable {
 		this.referencia = referencia;
 	}
 
+	public Long getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Long categoria) {
+		this.categoria = categoria;
+	}
+
+	
+	public String getPrecoPromocional() {
+		return precoPromocional;
+	}
+
+	public void setPrecoPromocional(String precoPromocional) {
+		this.precoPromocional = precoPromocional;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public String getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(String quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public String getQuantidadeMinima() {
+		return quantidadeMinima;
+	}
+
+	public void setQuantidadeMinima(String quantidadeMinima) {
+		this.quantidadeMinima = quantidadeMinima;
+	}
+
 	public void handleFileUpload(FileUploadEvent event) {
 		this.file = event.getFile();
 		this.bImagem = event.getFile().getContents();
@@ -147,14 +247,14 @@ public class CrudProdutoController implements Serializable {
 		msg.setSeverity(FacesMessage.SEVERITY_INFO);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	public void refresh() {  
-        FacesContext context = FacesContext.getCurrentInstance();  
-        Application application = context.getApplication();  
-        ViewHandler viewHandler = application.getViewHandler();  
-        UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());  
-        context.setViewRoot(viewRoot);  
-        context.renderResponse();  
-    } 
+
+	public void refresh() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Application application = context.getApplication();
+		ViewHandler viewHandler = application.getViewHandler();
+		UIViewRoot viewRoot = viewHandler.createView(context, context.getViewRoot().getViewId());
+		context.setViewRoot(viewRoot);
+		context.renderResponse();
+	}
 
 }
