@@ -4,11 +4,13 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="OnLine-ejbPU" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:/MySql-Market</jta-data-source>
+		<jta-data-source>java:jboss/datasources/MysqlMarket</jta-data-source>
+		<class>model.entities.Categoria</class>
         <class>model.entities.Produtos</class>
-    	<class>model.entities.Usuarios</class>    	
+    	<class>model.entities.Usuarios</class>
+    	<class>model.entities.DiarioEstoque</class>    	
 		<properties>
-            <property name='hibernate.hbm2ddl.auto' value='update'/>
+            <property name='hibernate.hbm2ddl.auto' value='none'/>
         </properties>
 	</persistence-unit>
 </persistence>
