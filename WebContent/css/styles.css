@@ -7804,3 +7804,13 @@ video {
 .post-title > a:hover {
   color: #0055ff;
 }
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+    position: relative !important;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+
+

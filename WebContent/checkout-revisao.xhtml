@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<body>
+	<ui:include src="header.xhtml" />
+	<link rel="stylesheet" href="css/styles-checkout.css" />
+
+	<div class='container' id='main-container'>
+		<div class='row'>
+			<f:view>
+				<h1>
+					<h:outputText value="Revise seu Pedido" />
+				</h1>
+				<h:form>
+					<p:panelGrid layout="grid" columns="3" style="border: none;">
+						<p:outputLabel value="Nome do Produto" style="font-weigh: bold;" />
+						<p:outputLabel value="Quantidade" style="font-weigh: bold;" />
+						<p:outputLabel value="Subtotal" style="font-weigh: bold;" />
+					</p:panelGrid>
+					<br />
+					<p:dataList value="#{checkoutController.pedido.itemPedidos}"
+						var="pedido" type="unordered" itemType="none">
+
+						<p:panelGrid layout="grid" columns="3" style="border: none;">
+
+							<h:outputText value="#{pedido.produto.nome}" />
+							<h:outputText value="#{pedido.quantidade}" />
+							<h:outputText value="#{pedido.subTotal()}" />
+						</p:panelGrid>
+					</p:dataList>
+					<br />
+					<br />
+					<p:panelGrid layout="grid" columns="3" style="border: none;">
+						<h:outputText value="" />
+						<h:outputText value="" />
+						<p:outputLabel value="Total: #{checkoutController.pedido.total()}"
+							style="font-weigh: bold; left: 50%;" />
+					</p:panelGrid>
+
+					<br />
+					<p:commandButton class="btn btn-success" value="Finalizar Pedido"
+						action="#{checkoutController.finalizarPedido()}" process="@this" />
+				</h:form>
+			</f:view>
+		</div>
+	</div>
+
+</body>
+</html>
