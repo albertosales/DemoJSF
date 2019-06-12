@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>ADM Categoria</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../css/styles.css" />
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+</h:head>
+<h:body>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<p:growl id="messages" showDetail="true" />
+				<div class="row">
+					<div class="col col-md-1">
+						<a href="../adm.html">
+							<button class="btn btn-warning btn-sm">
+								<img src="../images/baseline_home_black_18dp.png" alt="" />
+							</button>
+						</a>
+					</div>
+					<div class="col col-md-11" align="center">
+						<span style="font-size: 18pt;">Gerenciamento de Categorias</span>
+					</div>
+				</div>
+				<hr />
+				<h:form>
+					<div class="row">
+						<div class="col col-md-6">
+							<label for="preco">Nome</label>
+							<h:inputText value="#{categoriaController.nome}" type="nunber"
+								class="form-control" required="true" name="preco" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col col-md-2">
+							<h:commandButton class="btn btn-md btn-primary btn-block"
+								type="submit" value="Salvar"
+								action="#{categoriaController.salvar()}" />
+						</div>
+						<div class="col col-md-2">
+							<h:commandButton class="btn btn-md btn-danger btn-block"
+								value="Cancelar" action="#{categoriaController.limparCampos()}" />
+						</div>
+					</div>
+				</h:form>
+
+				<br />
+				<div class='row'>
+					<div class="col col-md-12">
+						<f:view>
+							<h:form>
+								<h:dataTable value="#{categoriaController.categorias}"
+									var="item" class="table table-bordered">
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Nome" />
+										</f:facet>
+										<h:outputText value="#{item.nome}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="opções" />
+										</f:facet>
+										<h:commandButton value="Editar" class="btn btn-warning btn-sm"
+											action="#{categoriaController.alterar(item)}" />
+										<h:commandButton value="Excluir" class="btn btn-danger btn-sm"
+											action="#{categoriaController.excluir(item)}" />
+									</h:column>
+								</h:dataTable>
+							</h:form>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</h:body>
+</html>

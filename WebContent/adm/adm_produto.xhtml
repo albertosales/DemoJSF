@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>ADM Produto</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../css/styles.css" />
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
+</h:head>
+<h:body>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<p:growl id="messages" showDetail="true" />
+				<div class="row">
+					<div class="col col-md-1">
+						<a href="../adm.html">
+							<button class="btn btn-warning btn-sm">
+								<img src="../images/baseline_home_black_18dp.png" alt="" />
+							</button>
+						</a>
+					</div>
+					<div class="col col-md-11" align="center">
+						<span style="font-size: 18pt;">Gerenciamento de Produtos</span>
+					</div>
+				</div>
+				<hr />
+				<h:form>
+					<div class="row">
+						<div class="col col-md-4">
+							<label for="referencia">Referência</label>
+							<h:inputText value="#{crudProdutoController.referencia}"
+								class="form-control" required="true" name="referencia" />
+							<label for="nome">Nome</label>
+							<h:inputText value="#{crudProdutoController.nome}"
+								class="form-control" required="true" name="nome" />
+							<h:message for="nome" value="O nome é obrigatório" />
+							<label for="qtd_estoque">Quantidade em Estoque</label>
+							<h:inputText value="#{crudProdutoController.quantidade}"
+								type="number" class="form-control" required="false"
+								name="qtd_estoque" disabled="true" />
+						</div>
+						<div class="col col-md-4">
+							<label for="preco">Preço</label>
+							<h:inputText value="#{crudProdutoController.preco}" type="number"
+								class="form-control" required="true" name="preco" />
+							<label for="descricao">Descrição</label>
+							<h:inputText value="#{crudProdutoController.descricao}"
+								class="form-control" required="true" name="descricao" />
+							<label for="qtd_minima">Quantidade Minima</label>
+							<h:inputText value="#{crudProdutoController.quantidadeMinima}"
+								class="form-control" required="true" name="qtd_minima" />
+						</div>
+						<div class="col col-md-4">
+							<label for="preco_promocional">Preço Promocional</label>
+							<h:inputText value="#{crudProdutoController.precoPromocional}"
+								type="number" class="form-control" required="false"
+								name="preco_promocional" />
+							<label for="marca">Marca</label>
+							<h:inputText value="#{crudProdutoController.marca}"
+								class="form-control" required="true" name="marca" />
+							<label for="categoria">Categoria</label><br />
+							<h:selectOneMenu class="form-control" name="categoria"
+								id="categoria_id" value="#{crudProdutoController.categoria}">
+								<f:selectItems value="#{crudProdutoController.valuesComboBox}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="col col-md-12">
+							<label for="preco">Imagem</label>
+							<p:fileUpload
+								fileUploadListener="#{crudProdutoController.handleFileUpload}"
+								mode="advanced" dragDropSupport="false" update="messages"
+								sizeLimit="750000" fileLimit="1"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col col-md-2">
+							<h:commandButton class="btn btn-md btn-primary btn-block"
+								type="submit" value="Salvar"
+								action="#{crudProdutoController.salvar()}" />
+						</div>
+						<div class="col col-md-2">
+							<h:commandButton class="btn btn-md btn-danger btn-block"
+								value="Cancelar" action="#{crudProdutoController.limpar()}" />
+						</div>
+					</div>
+				</h:form>
+
+				<br />
+				<div class='row'>
+					<div class="col col-md-12">
+						<f:view>
+							<h:form>
+								<div class="table-responsive">
+									<h:dataTable value="#{produtoController.todosProdutos()}"
+										var="item" class="table table-bordered">
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Imagem" />
+											</f:facet>
+											<img src="data:image/png;base64,#{item.imagemBase64}"
+												height="60" width="60" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Referência" />
+											</f:facet>
+											<h:outputText value="#{item.referencia}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Preço" />
+											</f:facet>
+											<h:outputText value="#{item.preco}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Qtd Em Estoque" />
+											</f:facet>
+											<h:outputText value="#{item.quantidade}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Nome" />
+											</f:facet>
+											<h:outputText value="#{item.nome}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Descrição" />
+											</f:facet>
+											<h:outputText value="#{item.descricao}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="Categoria" />
+											</f:facet>
+											<h:outputText value="#{item.categoria.nome}" />
+										</h:column>
+										<h:column>
+											<f:facet name="header">
+												<h:outputText value="opções" />
+											</f:facet>
+											<h:commandButton value="Editar"
+												class="btn btn-warning btn-sm"
+												action="#{crudProdutoController.alterar(item)}" />
+											<h:commandButton value="Excluir"
+												class="btn btn-danger btn-sm"
+												action="#{crudProdutoController.excluir(item)}" />
+										</h:column>
+									</h:dataTable>
+								</div>
+							</h:form>
+						</f:view>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</h:body>
+</html>
