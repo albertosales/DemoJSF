@@ -58,7 +58,6 @@ public class CheckoutController implements Serializable {
 			itemPedido.setPedido(this.pedido);
 			itemPedido.setProduto(produto);
 			itemPedido.setQuantidade(item.getQtde());
-			
 			this.pedido.getItemPedidos().add(itemPedido);
 		}
 	}
@@ -74,11 +73,13 @@ public class CheckoutController implements Serializable {
 		this.pedido.getPagamento().setTipoPagamento(tipoPagamento);
 		pedidoFacade.create(this.pedido);
 		carrinho.removeTodos();
+		this.init();
 		
 		return "pedido-completo";
 	}
 	
 	public String revisao() {
+		recuperarCarrinho();
 		return "checkout-revisao";
 	}
 	
