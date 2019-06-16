@@ -1,0 +1,18 @@
+.ui-radiobutton-icon {
+	/* margin-left: 1px; */
+	
+}
+
+.ui-icon {
+	display: block;
+	vertical-align: baseline;
+	margin-top: -1px;
+	margin-left: 0;
+}
+
+
+.ui-widget-content {
+    border: none !important;
+    background: #fff;
+    color: #4f4f4f;
+}
